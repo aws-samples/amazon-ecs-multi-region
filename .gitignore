@@ -1,0 +1,11 @@
+# Cloud9
+.c9
+.nzm-*
+
+# CDK
+cdk.out/
+
+# Javascript
+node_modules/
+dist/
+pack/
