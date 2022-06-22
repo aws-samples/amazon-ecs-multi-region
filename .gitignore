@@ -1,0 +1,23 @@
+# General
+.vscode
+
+# Cloud9
+.c9
+.nzm-*
+
+# CDK
+cdk.out/
+cdk.context.json
+*.js
+*.d.ts
+
+# Javascript
+node_modules/
+dist/
+pack/
+
+# Python
+__pycache__/
+.venv
+.python-version
+
