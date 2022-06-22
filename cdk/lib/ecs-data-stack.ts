@@ -4,6 +4,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 
 export interface EcsDataStackProps extends StackProps {
   tableName: string;
+  replicationRegions: Array<string>;
 }
 
 export class EcsDataStack extends Stack {
@@ -20,6 +21,7 @@ export class EcsDataStack extends Stack {
       },
       tableName: props.tableName,
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      replicationRegions: props.replicationRegions,
 
       /**
        *  The default removal policy is RETAIN, which means that cdk destroy will not attempt to delete
