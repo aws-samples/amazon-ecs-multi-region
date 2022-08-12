@@ -1,14 +1,22 @@
 # ECS Multi-Region Workshop
 
-This is part of the ECS Multi-region workshop.
+This repository contains the code for the ECS Multi-region workshop.
 
 The `app` folder contains a Python Flask application for books API that uses DynamoDB as the data store.
+
 The `cdk` folder contains the infrastructure code that deploys this application to Amazon Elastic Container Service (Amazon ECS).
 
 ## Prerequisites
 
 1. [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install)
 2. [Docker](https://docs.docker.com/get-docker/)
+
+## Branches
+
+The repository contains two main branches that can be used:
+
+* feature/single_region: Used to deploy the application to a single AWS region.
+* main: Used to deploy the application to two AWS regions.
 
 ## Deploying to AWS
 
