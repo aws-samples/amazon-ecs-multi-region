@@ -50,5 +50,5 @@ const secondaryBackendStack = new EcsBackendStack(app, 'workshop-backend-seconda
 const routingStack = new EcsRoutingStack(app, 'workshop-routing', {
   loadBalancer: mainBackendStack.apiService.loadBalancer,
   env: envMainRegion,
-  secondaryLoadBalancerArn: process.env.WORKSHOP_SECONDARY_ALB_ARN
+  secondaryLoadBalancerArn: process.env.WORKSHOP_SECONDARY_ALB_ARN!
 });
