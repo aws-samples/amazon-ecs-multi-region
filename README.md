@@ -20,44 +20,102 @@ The repository contains two main branches that can be used:
 
 ## Deploying to AWS
 
-1. Make sure that the AWS CLI uses the intended region:
+In this section we will explain how to deploy the application to 2 different regions.
 
-```bash
-aws configure set region <your main region of choice (e.g. us-east-1)>
-```
+### Bootstrapping CDK
 
-2. Navigate to the CDK folder:
+1. Navigate to the CDK folder:
 
 ```bash
 cd cdk
 ```
 
-3. Install NPM packages:
+2. Install NPM packages:
 
 ```bash
 npm install
 ```
 
-4. Deploy the foundation stack:
+3. Make sure that the AWS CLI uses the main region:
+
+```bash
+aws configure set region <your main region of choice (e.g. us-east-1)>
+```
+
+4. Bootstrap the AWS main region:
+
+```bash
+cdk bootstrap
+```
+
+1. Export environment variables needed for bootstrapping the secondary region:
+
+```bash
+export WORKSHOP_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+export WORKSHOP_SECONDARY_REGION=<your secondary region of choice (e.g. us-west-1)>
+```
+
+6. Bootstrap the AWS secondary region:
+
+```bash
+cdk bootstrap aws://$WORKSHOP_ACCOUNT_ID/$WORKSHOP_SECONDARY_REGION
+```
+
+### Deploying the foundation stack
+
+1. Deploy the foundation stack to the main region:
 
 ```bash
 cdk deploy workshop-foundation-main
 ```
 
-5. Deploy the data stack:
+2. Deploy the foundation stack to the secondary region:
+
+```bash
+cdk deploy workshop-foundation-secondary
+```
+
+### Deploying the data stack
+
+To deploy the data stack to both regions, run:
 
 ```bash
 cdk deploy workshop-data
 ```
 
-6. Deploy the backend stack (requires Docker to be installed and running):
+### Deploying the backend stack
+
+The following steps require Docker to be installed and running.
+
+1. Deploy the backend stack to the main region:
 
 ```bash
 cdk deploy workshop-backend-main --require-approval never
 ```
 
-7. Deploy the routing stack:
+2. Deploy the backend stack to the secondary region:
+
+```bash
+cdk deploy workshop-backend-secondary --require-approval never
+```
+
+### Deploying the routing stack
+
+Before we can deploy the routing stack, we will need to export the secondary region's load balancer ARN as an environment variable. The environment variable will be referenced by the CDK code.
+
+
+```bash
+export WORKSHOP_SECONDARY_ALB_ARN=$(aws elbv2 describe-load-balancers --names "workshop-alb" --query "LoadBalancers[0].LoadBalancerArn" --output text --region $WORKSHOP_SECONDARY_REGION)
+```
+
+Then we can deploy the routing stack as follows:
 
 ```bash
 cdk deploy workshop-routing --require-approval never
 ```
+
+### Test out the API
+
+* Navigate to Global Accelerators console
+* From left navigation select "Accelerators", and click on workshop-accelerator.
+* Copy the DNS name, then paste it in a new browser tab. Append `/healthcheck` to the URL. You should be able to see a JSON response for the health check.
