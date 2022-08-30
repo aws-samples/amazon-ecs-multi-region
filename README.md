@@ -9,7 +9,8 @@ The `cdk` folder contains the infrastructure code that deploys this application 
 ## Prerequisites
 
 1. [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install)
-2. [Docker](https://docs.docker.com/get-docker/)
+2. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+3. [Docker](https://docs.docker.com/get-docker/)
 
 ## Branches
 
