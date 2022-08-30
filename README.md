@@ -48,7 +48,7 @@ aws configure set region <your main region of choice (e.g. us-east-1)>
 cdk bootstrap
 ```
 
-1. Export environment variables needed for bootstrapping the secondary region:
+5. Export environment variables needed for bootstrapping the secondary region:
 
 ```bash
 export WORKSHOP_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
