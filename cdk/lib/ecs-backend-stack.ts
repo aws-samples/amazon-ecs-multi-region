@@ -52,7 +52,7 @@ export class EcsBackendStack extends Stack {
       assignPublicIp: false,
       listenerPort: 80,
       // Task Definition
-      desiredCount: 1,
+      desiredCount: 3,
       cpu: 512,
       memoryLimitMiB: 1024,
       taskImageOptions: {
