@@ -43,7 +43,7 @@ export class EcsBackendStack extends Stack {
     this.apiService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'service', {
       cluster: cluster,
       serviceName: 'workshop-service',
-      maxHealthyPercent: 200,
+      maxHealthyPercent: 100,
       minHealthyPercent: 50,
       // Loadbalancer
       loadBalancerName: 'workshop-alb',
