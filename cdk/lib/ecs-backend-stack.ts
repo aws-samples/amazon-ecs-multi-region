@@ -116,7 +116,7 @@ export class EcsBackendStack extends Stack {
       value: cluster.clusterArn,
     });
     
-    // Output the ARN of the ECS Cluster
+    // Output the Name of the ECS Task Execution Role
     new CfnOutput(this, "ecsTaskExecutionRole", {
       value: this.apiService.taskDefinition.executionRole?.roleName || 'Role not defined',
     });
